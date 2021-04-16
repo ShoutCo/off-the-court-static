@@ -184,12 +184,12 @@
             <h4 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-2 display-5">We'd love to hear from you</h4>
         </div>
         <div class="row justify-content-center mt-4">
-            <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="tPWYBCiMWESaPMLgPlv+4vfMAhNqPSc+j4o3fy0vU2jg4H3cV040vsTqOiX6shU4fhKwy7tBACYCrHIENpwcnSQCi+OTgP/Luh2GjMHWLslmKC20zG7T0SmOsJ3lNl+S">
+            <div class="col-lg-8 mx-auto mbr-form">
+                <form id="interest-form" action="http://localhost:5001/pogshout/us-central1/otcInterest" method="POST" class="mbr-form form-with-styler" data-form-title="OTC Interest">
                     <div class="row">
-                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
+                        <div id="form-success" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
                             the form!</div>
-                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
+                        <div id="form-failure" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
                             problem!</div>
                     </div>
                     <div class="dragArea row">
@@ -199,8 +199,8 @@
                         <div class="col-md col-sm-12 form-group" data-for="email">
                             <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form5-q">
                         </div>
-                        <div class="col-12 form-group" data-for="url">
-                            <input type="url" name="url" placeholder="Sport and Current Team" data-form-field="url" class="form-control" value="" id="url-form5-q">
+                        <div class="col-md col-sm-12 form-group" data-for="sportAndTeam">
+                            <input type="text" name="sportAndTeam" placeholder="Sport and Current Team" data-form-field="sportAndTeam" class="form-control" value="" id="sportAndTeam-form5-3">
                         </div>
                         <div class="col-12 form-group" data-for="textarea">
                             <textarea name="textarea" placeholder="Message" data-form-field="textarea" class="form-control" id="textarea-form5-q"></textarea>
@@ -211,8 +211,34 @@
             </div>
         </div>
     </div>
-</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/d" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Built with <a href="https://mobirise.site/b" style="color:#aaa;">Mobirise</a> template</p></section><script src="assets/web/assets/jquery/jquery.min.js"></script>  <script src="assets/popper/popper.min.js"></script>  <script src="assets/tether/tether.min.js"></script>  <script src="assets/bootstrap/js/bootstrap.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/viewportchecker/jquery.viewportchecker.js"></script>  <script src="assets/formstyler/jquery.formstyler.js"></script>  <script src="assets/formstyler/jquery.formstyler.min.js"></script>  <script src="assets/datepicker/jquery.datetimepicker.full.js"></script>  <script src="assets/dropdown/js/nav-dropdown.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
-  
+</section><section style="display: hidden;"><a href="https://mobirise.site/r" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;"></p></section><script src="assets/web/assets/jquery/jquery.min.js"></script>  <script src="assets/popper/popper.min.js"></script>  <script src="assets/tether/tether.min.js"></script>  <script src="assets/bootstrap/js/bootstrap.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/viewportchecker/jquery.viewportchecker.js"></script>  <script src="assets/dropdown/js/nav-dropdown.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>  <script src="assets/parallax/jarallax.min.js"></script>  <script src="assets/formstyler/jquery.formstyler.js"></script>  <script src="assets/formstyler/jquery.formstyler.min.js"></script>  <script src="assets/datepicker/jquery.datetimepicker.full.js"></script>  <script src="assets/theme/js/script.js"></script>  
+<script>
+    $(document).ready(function() {
+        $('#form-success').hide();   
+        $('#form-failure').hide();   
+        $('#interest-form').submit(function(e) {
+            e.preventDefault();
+            $('#form-success').hide();   
+            $('#form-failure').hide();   
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function(data) {
+                 $('#form-success').show();
+                },
+                error: function(err) {
+                    console.error(err);
+                    $('#form-failure').show();
+                }
+            });
+        });
+    });
+</script>
   
   <input name="animation" type="hidden">
   </body>

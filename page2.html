@@ -181,12 +181,12 @@
     
     <div class="align-center container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="AhwbIWtUQo1+Ye0PVMIpdsZc+j8wf/nPl/1uTag0JRnWNcUn2Du7tHZLeGlfLRbU955/AOwjmERr0C6Pdjj/+vkoXuK/8keOJErrn78hvk4S3cI4lSoi13k3VzORIDrF">
+            <div class="col-lg-8 mx-auto mbr-form">
+                <form id="interest-form" action="http://localhost:5001/pogshout/us-central1/otcNewsletter" method="POST" class="mbr-form form-with-styler" data-form-title="OTC Newsletter">
                     <div class="row">
-                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling
+                        <div id="form-success" data-form-alert="" class="alert alert-success col-12">Thanks for filling
                             out the form!</div>
-                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
+                        <div id="form-failure" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
                             problem!</div>
                     </div>
                     <div class="dragArea row">
@@ -209,8 +209,34 @@
             </div>
         </div>
     </div>
-</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/j" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Site was <a href="https://mobirise.site/g" style="color:#aaa;">built</a> with Mobirise</p></section><script src="assets/web/assets/jquery/jquery.min.js"></script>  <script src="assets/popper/popper.min.js"></script>  <script src="assets/tether/tether.min.js"></script>  <script src="assets/bootstrap/js/bootstrap.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/viewportchecker/jquery.viewportchecker.js"></script>  <script src="assets/dropdown/js/nav-dropdown.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
-  
+</section><section style="display: hidden;"><a href="https://mobirise.site/r" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;"></p></section><script src="assets/web/assets/jquery/jquery.min.js"></script>  <script src="assets/popper/popper.min.js"></script>  <script src="assets/tether/tether.min.js"></script>  <script src="assets/bootstrap/js/bootstrap.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/viewportchecker/jquery.viewportchecker.js"></script>  <script src="assets/dropdown/js/nav-dropdown.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>  <script src="assets/parallax/jarallax.min.js"></script>  <script src="assets/formstyler/jquery.formstyler.js"></script>  <script src="assets/formstyler/jquery.formstyler.min.js"></script>  <script src="assets/datepicker/jquery.datetimepicker.full.js"></script>  <script src="assets/theme/js/script.js"></script>  
+<script>
+    $(document).ready(function() {
+        $('#form-success').hide();   
+        $('#form-failure').hide();   
+        $('#interest-form').submit(function(e) {
+            e.preventDefault();
+            $('#form-success').hide();   
+            $('#form-failure').hide();   
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function(data) {
+                 $('#form-success').show();
+                },
+                error: function(err) {
+                    console.error(err);
+                    $('#form-failure').show();
+                }
+            });
+        });
+    });
+</script>
   
   <input name="animation" type="hidden">
   </body>
